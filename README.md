@@ -1,0 +1,20 @@
+## ums512_1h10_Natv_Tablet-user 11 RP1A.201005.001 230 release-keys
+- Manufacturer: lenovo
+- Platform: ums512
+- Codename: TB328FU
+- Brand: Lenovo
+- Flavor: ums512_1h10_Natv_Tablet-user
+- Release Version: 11
+- Kernel Version: 4.14.193
+- Id: RP1A.201005.001
+- Incremental: TB328FU_USR_S000027_2203012035_TRUNK20A_ROW
+- Tags: release-keys
+- CPU Abilist: arm64-v8a,armeabi-v7a,armeabi
+- A/B Device: true
+- Treble Device: true
+- Locale: undefined
+- Screen Density: undefined
+- Fingerprint: Lenovo/TB328FU/TB328FU:11/RP1A.201005.001/230:user/release-keys
+- OTA version: 
+- Branch: ums512_1h10_Natv_Tablet-user-11-RP1A.201005.001-230-release-keys
+- Repo: lenovo_tb328fu_dump

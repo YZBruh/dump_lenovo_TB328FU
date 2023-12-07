@@ -1,0 +1,17 @@
+service vendor.countryservice /vendor/bin/countryservice read 60 8
+	class core
+    user system
+    group system
+    oneshot
+
+on init
+	start vendor.countryservice
+
+on property:vendor.build.countrycode.enable=1
+    setprop ro.vendor.build.fingerprint ${vendor.build.fingerprint}
+    setprop ro.bootimage.build.fingerprint ${vendor.build.fingerprint}
+    setprop ro.odm.build.fingerprint ${vendor.build.fingerprint}
+    setprop ro.product.build.fingerprint ${vendor.build.fingerprint}
+    setprop ro.system_ext.build.fingerprint ${vendor.build.fingerprint}
+    setprop ro.system.build.fingerprint ${vendor.build.fingerprint}
+

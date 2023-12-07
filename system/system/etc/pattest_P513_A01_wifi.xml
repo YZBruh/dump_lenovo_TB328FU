@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<testitem item_name="sdstatuscheck" item_action="SimandSDCardStatusCheck" />
+	
+	<testitem item_name="keyboard" item_action="MidtestKeyboard" />
+	
+	<testitem item_name="audio_speaker_top" item_action="AutoSpeakerLeft" />
+	
+    <testitem item_name="audio_speaker_bottom" item_action="AutoSpeakerRight" />
+
+    <testitem item_name="battery_temperature" item_action="BatteryTemperature" />
+	
+	<testitem item_name="charge_test" item_action="ChargeVoltage">
+        <charge_voltage_current item_key="voltage" item_value="/sys/class/power_supply/battery/voltage_now" />
+        <charge_voltage_current item_key="current" item_value="/sys/class/power_supply/battery/current_now" />
+        <charge_voltage_current item_key="voltageUnit" item_value="μV" />
+        <charge_voltage_current item_key="currentUnit" item_value="μA" />
+    </testitem>    
+	
+    <testitem item_name="front_camera" item_action="FrontTestCameraClick" >
+        <config config_name="pre_orientation" config_value="90"/>
+        <config config_name="pre_height" config_value="1080"/>
+        <config config_name="pre_width" config_value="1440"/>
+    </testitem>
+
+    <testitem item_name="back_camera" item_action="BackTestCameraClickNew" >
+        <config config_name="back_orientation" config_value="90"/>
+        <config config_name="back_height" config_value="1080"/>
+        <config config_name="back_width" config_value="1440"/>
+    </testitem>
+	
+    <testitem item_name="qrcode_test" item_action="QRCode" > 
+        <config config_name="qrc_orientation" config_value="90"/>
+    </testitem>
+	
+	<testitem item_name="slot" item_action="CardSlotStatusCheck" />
+</resources>

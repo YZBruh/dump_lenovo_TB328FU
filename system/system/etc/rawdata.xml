@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resources>
+	<!-- hardware is to diff qcom and mtk platform-->
+	<config config_name="hardware" config_value="qcom" />
+	<!-- customer is to diff xiaomi lenovo and so on -->
+	<config config_name="customer" config_value="xiaomi"/>
+	<!-- 根据项目情况配置  从指定的路径中读取IC，根据对应TP IC测试方式（Apk,Jar,Node,Script）做测试，用于TP存在多供情况-->
+	<!-- 注意：TP驱动只能存在一个TP IC节点单独存在的情况，不能存在两个或多个TP IC节点共存情况 TpRawdata会依次读取配置的路径节点，直到读取就结束-->
+
+	<TpRawData tprawdata_tpicpath="/proc/tp_info">
+	</TpRawData>
+
+	<hx8527
+		tprawdata_method="Apk"
+		packageName="com.himax.mpap"
+		activityName="com.himax.mpap.MainActivity"
+		actionName="android.intent.action.himax"
+		parameter="command:1"
+		/>
+
+	<hx83100
+		tprawdata_method="Script"
+		send_command="mt_test -f /system/etc/Default.dat -m 5 -i 3 -d 0 -r 1 -l /sdcard/elan -n MT_Log.txt -t MT_RawData.csv"
+		/>
+	<hx83112a
+		tprawdata_method="Node"
+		read_path="proc/android_touch/self_test"
+		read_value="pass"
+		/>
+	<ili9881
+		tprawdata_method="Node"
+		read_path="proc/ilitek/mp_lcm_on_test"
+		read_value="pass"
+		/>
+	<td4320
+		tprawdata_method="Node"
+		read_path="proc/tp_selftest"
+		read_value="pass"
+		/>
+	<td4310
+		tprawdata_method="Apk"
+		packageName="com.synaptics.rawdata"
+		activityName="com.synaptics.rawdata.RawDataTestActivity"
+		actionName="android.intent.action.synaptics"
+		parameter="command:1;logEnabled:true;autofinish:true"
+		/>
+
+	<EKTH3668
+		tprawdata_method="Script"
+		send_command="mt_test -f /system/etc/Default.dat -m 5 -i 3 -d 0 -r 1 -l /sdcard/elan -n MT_Log.txt -t MT_RawData.csv"
+		/>
+
+	<GT917D
+		tprawdata_method="Apk"
+		packageName="com.goodix.rawdata"
+		activityName="com.goodix.rawdata.RawDataTest"
+		actionName="android.intent.action.goodix"
+		parameter="command:1;frequences:1;autofinish:true;successfinish:true;language:zh;inidir:system/etc/;resultdir:sdcard/Rawdata/"
+		/>
+
+	<cyppress
+		tprawdata_method="Node"
+		write_value="1"
+		write_node="proc/android_touch/self_test"
+		read_path="sys/bus/i2c/devices/3-0024/cmcp_test"
+		read_value="1"
+		/>
+
+	<!-- 操作节点方式 只提供两种测试方式
+ 1：写值到节点开始测试  读取指定节点过去测试结果
+ 2：-->
+	<rawdata_Node
+		write_value="1"
+		write_node="proc/android_touch/self_test"
+		read_path="proc/android_touch/self_test"
+		read_value="pass"
+		/>
+
+	<nt36526
+		tprawdata_method="Node"
+		read_path="proc/nvt_selftest"
+		read_value="pass"
+		/>
+
+	<!-- 调用脚本方式 -->
+	<rawdata_Script
+		send_command="mt_test -f /system/etc/Default.dat -m 5 -i 3 -d 0 -r 1 -l /sdcard/elan -n MT_Log.txt -t MT_RawData.csv"
+		/>
+	<!--<td4300>
+		<tprawdata_method value="Apk"></tprawdata_method>
+		<packageName value="com.synaptics.rawdata"></packageName>
+		<activityName value="com.synaptics.rawdata.RawDataTestActivity"></activityName>
+		<actionName value="android.intent.action.synaptics"></actionName>
+		<parameter value="command:1;logEnabled:true;autofinish:true"></parameter>
+	</td4300>-->
+
+	<!-- 调用bin文件方式 -->
+	<Hideep-IST940E
+		tprawdata_method="Script"
+		send_command="./system/bin/tp_self_test"
+		/>
+
+	<Wacom-G12TL
+		tprawdata_method="Script"
+		send_command="/system/bin/sh /system/bin/scheckcap_5114.sh"
+		/>
+
+</resources>

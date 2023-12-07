@@ -1,0 +1,5 @@
+service vendor.keyboxchecker /vendor/bin/keyboxchecker
+    class core
+    user system
+    group system
+    oneshot

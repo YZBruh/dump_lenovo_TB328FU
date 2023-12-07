@@ -1,0 +1,99 @@
+import /vendor/etc/init/hw/init.${ro.hardware}.usb.rc
+import /vendor/etc/init/hw/init.ram.rc
+import /vendor/etc/init/hw/init.storage.rc
+import /vendor/etc/init/hw/init.cali.rc
+import /vendor/etc/init/hw/init.factorytest.rc
+
+on init
+    start watchdogd
+	chmod 666 sys/kernel/extpa/fsm_adp
+
+on post-fs-data
+    setprop vold.post_fs_data_done 1
+    setprop debug.sf.disable_backpressure 1
+    setprop debug.sf.latch_unsignaled 1
+
+# Set watchdog timer to 30 seconds and pet it every 10 seconds to get a 20 second margin
+service watchdogd /system/bin/watchdogd 10 30
+    class core
+    oneshot
+    seclabel u:r:watchdogd:s0
+on boot
+# for devfreq mm
+    chmod 660 /sys/class/devfreq/isp-dvfs/isp_governor/set_work_freq
+    chown cameraserver system /sys/class/devfreq/isp-dvfs/isp_governor/set_work_freq
+    chmod 660 /sys/class/devfreq/dcam-if-dvfs/dcam-if_governor/set_work_freq
+    chown cameraserver system /sys/class/devfreq/dcam-if-dvfs/dcam-if_governor/set_work_freq
+    chmod 660 /sys/class/devfreq/isp-dvfs/isp_governor/set_work_index
+    chown cameraserver system /sys/class/devfreq/isp-dvfs/isp_governor/set_work_index
+    chmod 660 /sys/class/devfreq/dcam-if-dvfs/dcam-if_governor/set_work_index
+    chown cameraserver system /sys/class/devfreq/dcam-if-dvfs/dcam-if_governor/set_work_index
+    chmod 660 /sys/class/devfreq/isp-dvfs/isp_governor/set_hw_dvfs_en
+    chown cameraserver system /sys/class/devfreq/isp-dvfs/isp_governor/set_hw_dvfs_en
+    chmod 660 /sys/class/devfreq/fd-dvfs/fd_governor/set_work_index
+    chown cameraserver system /sys/class/devfreq/fd-dvfs/fd_governor/set_work_index
+
+
+service btAddrProperty /vendor/bin/btAddrProperty
+    class late_start
+    user bluetooth
+    group bluetooth
+    disabled
+    oneshot
+
+service wifiAddrProperty /vendor/bin/wifiAddrProperty
+    class late_start
+    user wifi
+    group wifi
+    disabled
+    oneshot
+
+
+on property:sys.boot_completed=1
+    start btAddrProperty
+    start wifiAddrProperty
+
+#Add for lenovo online
+on init
+	mkdir /lenovocust 0777 system system
+
+on post-fs
+	chown system system /lenovocust
+	chmod 0777 /lenovocust
+	restorecon_recursive /lenovocust
+
+#add for wifisar begin
+service wifisar_core_0 /vendor/bin/wifisar_core_0
+    user root
+    group root
+    disabled
+    oneshot
+on property:sys.wifisar.idx=0
+    start wifisar_core_0
+    #setprop debug.core.x 22
+
+service wifisar_core_1 /vendor/bin/wifisar_core_1
+    user root
+    group root
+    disabled
+    oneshot
+on property:sys.wifisar.idx=1
+    start wifisar_core_1
+    #setprop debug.core.x 22
+
+service wifisar_core_2 /vendor/bin/wifisar_core_2
+    user root
+    group root
+    disabled
+    oneshot
+on property:sys.wifisar.idx=2
+    start wifisar_core_2
+
+service wifisar_core_4 /vendor/bin/wifisar_core_4
+    user root
+    group root
+    disabled
+    oneshot
+on property:sys.wifisar.idx=4
+    start wifisar_core_4
+#add for wifisar end

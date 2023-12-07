@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <testitem item_name="lcd_test" item_action="Lcd6Color" >
+        <!-- note : color value is only RGB , image value is only absolut path -->
+        <color_item type="color" value="#FF0000"/>
+        <color_item type="image" value="/system/etc/onedot_port.png"/>
+        <color_item type="color" value="#0000FF"/>
+        <color_item type="color" value="#00FF00"/>
+        <color_item type="color" value="#FFFFFF"/>
+        <color_item type="color" value="#000000"/>
+        <color_item type="color" value="#444444"/>
+    </testitem>
+
+    <testitem item_name="touchpanel_test" item_action="Touchpanel_grid" >
+        <config config_name="grid_typec_test" config_value="true"/>
+        <config config_name="node_typec_orientation" config_value="/sys/class/typec/port0/typec_cc_polarity_role"/>
+        <config config_name="grid_diagonal_line_r" config_value="85"/>
+        <config config_name="grid_col_num" config_value="13"/>
+        <config config_name="grid_row_num" config_value="13"/>
+    </testitem>
+
+    <testitem item_name="Touchpanel_line" item_action="Touchpanel_line" />
+
+    <testitem item_name="front_camera" item_action="FrontTestCameraClick" >
+        <config config_name="pre_orientation" config_value="90"/>
+        <config config_name="pre_height" config_value="1080"/>
+        <config config_name="pre_width" config_value="1440"/>
+    </testitem>
+
+    <testitem item_name="back_camera" item_action="BackTestCameraClickNew" >
+        <config config_name="back_orientation" config_value="90"/>
+        <config config_name="back_height" config_value="1080"/>
+        <config config_name="back_width" config_value="1440"/>
+    </testitem>
+
+</resources>
